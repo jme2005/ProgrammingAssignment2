@@ -7,20 +7,17 @@
 
 makeCacheMatrix <- function(x = matrix()) {
         m<-NULL
-        set <-function(y) {
-                x<<-y
-                m<<-NULL
-        }
-        get <-function() x
-        setinv <- function(inv) m<<-inv
-        getinv <- function() m
-        list(set=set,get=get,
+        get <-function() x      #function returns the matrix x stored in the local environment
+        setinv <- function(inv) m<<-inv #function set the value of m to the inverse of the matrix to the parent environment
+        getinv <- function() m          #returns the value of the inverse
+        list(get=get,
              setinv=setinv,
-             getinv=getinv)
+             getinv=getinv)     # returns the matrix object that's
 }
 
 
-## Returns the inverse of a matrix by retrieving from cache if it's been calculated
+## Takes the matrix object created with the makeCacheMatrix function and returns the inverse 
+## of the matrix by retrieving from cache if it's been calculated
 ## or return calculate it and store it in cache if it has not been previously calculated.
 
 cacheSolve <- function(x, ...) {
@@ -31,7 +28,7 @@ cacheSolve <- function(x, ...) {
         }
         data<-x$get()           # if it's not available get the matrix
         inv<-solve(data,...)    # calculate the inverse
-        x$setinv(inv)           # store the inverse in cache
+        x$setinv(inv)           # store the inverse in cache of the local environment of makeCacheMatrix
         inv                     # Return the inverse of the matrix
         
 }
