@@ -7,8 +7,10 @@
 
 makeCacheMatrix <- function(x = matrix()) {
         m<-NULL
+       
+        }
         get <-function() x      #function returns the matrix x stored in the local environment
-        setinv <- function(inv) m<<-inv #function set the value of m to the inverse of the matrix to the parent environment
+        setinv <- function(inv) m<<-inv #function set the value of m to the inverse of the matrix to be stored in cache of the parent environment
         getinv <- function() m          #returns the value of the inverse
         list(get=get,
              setinv=setinv,
